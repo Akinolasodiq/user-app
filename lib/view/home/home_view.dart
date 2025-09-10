@@ -34,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Minute by tuk tuk",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
     {
@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Café de Noir",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
     {
@@ -50,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Bakes by Tella",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
   ];
@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Minute by tuk tuk",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
     {
@@ -69,7 +69,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Café de Noir",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
   ];
@@ -80,7 +80,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Mulberry Pizza by Josh",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
     {
@@ -88,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Barita",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
     {
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
       "name": "Pizza Rush Hour",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafa",
+      "type": "Cafe",
       "food_type": "Western Food"
     },
   ];
@@ -104,89 +104,73 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 46,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          "Good morning ${ServiceCall.userPayload[KKey.name] ?? ""}!",
+          style: TextStyle(
+            color: TColor.primaryText,
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyOrderView()),
+                );
+              },
+              icon: Image.asset(
+                "assets/img/shopping_cart.png",
+                width: 25,
+                height: 25,
+                color: TColor.primary,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+          ),
+        ],
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Delivering to",
+                  style: TextStyle(
+                    color: TColor.secondaryText,
+                    fontSize: 11,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Row(
                   children: [
                     Text(
-                      "Good morning ${ServiceCall.userPayload[KKey.name] ?? ""}!",
+                      "Current Location",
                       style: TextStyle(
-                          color: TColor.primaryText,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyOrderView()));
-                      },
-                      icon: Image.asset(
-                        "assets/img/shopping_cart.png",
-                        width: 25,
-                        height: 25,
-                        color: TColor.primary,
+                        color: TColor.secondaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
+                    const SizedBox(width: 25),
+                    Image.asset(
+                      "assets/img/dropdown.png",
+                      width: 12,
+                      height: 12,
+                      color: TColor.secondary,
+                    ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Delivering to",
-                      style:
-                          TextStyle(color: TColor.secondaryText, fontSize: 11),
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Current Location",
-                          style: TextStyle(
-                              color: TColor.secondaryText,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        Image.asset(
-                          "assets/img/dropdown.png",
-                          width: 12,
-                          height: 12,
-                          color: TColor.primary,
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: RoundTextfield(
+                const SizedBox(height: 20),
+                RoundTextfield(
                   hintText: "Search Food",
                   controller: txtSearch,
                   left: Container(
@@ -199,90 +183,105 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: catArr.length,
-                  itemBuilder: ((context, index) {
-                    var cObj = catArr[index] as Map? ?? {};
-                    return CategoryCell(
-                      cObj: cObj,
-                      onTap: () {},
-                    );
-                  }),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ViewAllTitleRow(
-                  title: "Popular Restaurants",
-                  onView: () {},
-                ),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding:const EdgeInsets.symmetric(horizontal: 8),
-                itemCount: popArr.length,
-                itemBuilder: ((context, index) {
-                  var pObj = popArr[index] as Map? ?? {};
-                  return PopularRestaurantRow(
-                    pObj: pObj,
-                    onTap: () {},
-                  );
-                }),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ViewAllTitleRow(
-                  title: "Most Popular",
-                  onView: () {},
-                ),
-              ),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: mostPopArr.length,
-                  itemBuilder: ((context, index) {
-                    var mObj = mostPopArr[index] as Map? ?? {};
-                    return MostPopularCell(
-                      mObj: mObj,
-                      onTap: () {},
-                    );
-                  }),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ViewAllTitleRow(
-                  title: "Recent Items",
-                  onView: () {},
-                ),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                itemCount: recentArr.length,
-                itemBuilder: ((context, index) {
-                  var rObj = recentArr[index] as Map? ?? {};
-                  return RecentItemRow(
-                    rObj: rObj,
-                    onTap: () {},
-                  );
-                }),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
+
+          // ✅ Scrollable Section
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      itemCount: catArr.length,
+                      itemBuilder: ((context, index) {
+                        var cObj = catArr[index] as Map? ?? {};
+                        return CategoryCell(
+                          cObj: cObj,
+                          onTap: () {},
+                        );
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ViewAllTitleRow(
+                      title: "Popular Restaurants",
+                      onView: () {},
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    itemCount: popArr.length,
+                    itemBuilder: ((context, index) {
+                      var pObj = popArr[index] as Map? ?? {};
+                      return PopularRestaurantRow(
+                        pObj: pObj,
+                        onTap: () {},
+                      );
+                    }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ViewAllTitleRow(
+                      title: "Most Popular",
+                      onView: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MyOrderView(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      itemCount: mostPopArr.length,
+                      itemBuilder: ((context, index) {
+                        var mObj = mostPopArr[index] as Map? ?? {};
+                        return MostPopularCell(
+                          mObj: mObj,
+                          onTap: () {},
+                        );
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ViewAllTitleRow(
+                      title: "Recent Items",
+                      onView: () {},
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    itemCount: recentArr.length,
+                    itemBuilder: ((context, index) {
+                      var rObj = recentArr[index] as Map? ?? {};
+                      return RecentItemRow(
+                        rObj: rObj,
+                        onTap: () {},
+                      );
+                    }),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

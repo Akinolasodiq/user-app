@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_button.dart';
 
-import 'checkout_view.dart';
+import '../checkout/checkout_view.dart';
 
 class MyOrderView extends StatefulWidget {
   const MyOrderView({super.key});
@@ -106,7 +106,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                                 "4.9",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: TColor.primary, fontSize: 12),
+                                    color: TColor.secondary, fontSize: 12),
                               ),
                               const SizedBox(
                                 width: 8,
@@ -248,7 +248,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                           label: Text(
                             "Add Notes",
                             style: TextStyle(
-                                color: TColor.primary,
+                                color: TColor.secondary,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -276,7 +276,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                         Text(
                           "\$68",
                           style: TextStyle(
-                              color: TColor.primary,
+                              color: TColor.secondary,
                               fontSize: 13,
                               fontWeight: FontWeight.w700),
                         )
@@ -299,7 +299,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                         Text(
                           "\$2",
                           style: TextStyle(
-                              color: TColor.primary,
+                              color: TColor.secondary,
                               fontSize: 13,
                               fontWeight: FontWeight.w700),
                         )
@@ -329,7 +329,7 @@ class _MyOrderViewState extends State<MyOrderView> {
                         Text(
                           "\$70",
                           style: TextStyle(
-                              color: TColor.primary,
+                              color: TColor.secondary,
                               fontSize: 22,
                               fontWeight: FontWeight.w700),
                         )

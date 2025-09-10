@@ -71,7 +71,7 @@ class MenuItemRow extends StatelessWidget {
                               mObj["rate"],
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: TColor.primary,
+                                color: TColor.secondary,
                                 fontSize: 11,
                               ),
                             ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/view/more/about_us_view.dart';
 import 'package:food_delivery/view/more/inbox_view.dart';
+import 'package:food_delivery/view/more/my_order_view.dart';
+import 'package:food_delivery/view/more/notification_view.dart';
 import 'package:food_delivery/view/more/payment_details_view.dart';
+import 'package:food_delivery/view/profile/profile_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common/service_call.dart';
-import 'my_order_view.dart';
-import 'notification_view.dart';
 
 class MoreView extends StatefulWidget {
   const MoreView({super.key});
@@ -25,8 +26,8 @@ class _MoreViewState extends State<MoreView> {
     },
     {
       "index": "2",
-      "name": "My Orders",
-      "image": "assets/img/more_my_order.png",
+      "name": "Profile",
+      "image": "assets/img/tab_profile_update.png",
       "base": 0
     },
     {
@@ -50,7 +51,7 @@ class _MoreViewState extends State<MoreView> {
     {
       "index": "6",
       "name": "Logout",
-      "image": "assets/img/more_info.png",
+      "image": "assets/img/more_logout.png",
       "base": 0
     },
   ];
@@ -58,44 +59,42 @@ class _MoreViewState extends State<MoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "More",
+          style: TextStyle(
+            color: TColor.primaryText,
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyOrderView()),
+                );
+              },
+              icon: Image.asset(
+                "assets/img/shopping_cart.png",
+                width: 25,
+                height: 25,
+                color: TColor.primary,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 46,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "More",
-                      style: TextStyle(
-                          color: TColor.primaryText,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyOrderView()));
-                      },
-                      icon: Image.asset(
-                        "assets/img/shopping_cart.png",
-                        width: 25,
-                        height: 25,
-                        color: TColor.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               ListView.builder(
                   padding: EdgeInsets.zero,
                   physics: const NeverScrollableScrollPhysics(),
@@ -120,7 +119,7 @@ class _MoreViewState extends State<MoreView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MyOrderView()));
+                                    builder: (context) => const ProfileView()));
                           case "3":
                             Navigator.push(
                                 context,

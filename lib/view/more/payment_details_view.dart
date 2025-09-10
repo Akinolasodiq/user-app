@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_icon_button.dart';
-import 'package:food_delivery/view/more/add_card_view.dart';
+import 'package:food_delivery/view/checkout/add_card_view.dart';
 
 import '../../common_widget/round_button.dart';
 import 'my_order_view.dart';
@@ -67,7 +67,7 @@ class _PaymentDetailsViewState extends State<PaymentDetailsView> {
                         "assets/img/shopping_cart.png",
                         width: 25,
                         height: 25,
-                        color: TColor.primary,
+                        color: TColor.secondary,
                       ),
                     ),
                   ],
@@ -220,7 +220,6 @@ class _PaymentDetailsViewState extends State<PaymentDetailsView> {
                 child: RoundIconButton(
                     title: "Add Another Credit/Debit Card",
                     icon: "assets/img/add.png",
-                    color: TColor.primary,
                     fontSize: 16,
                     onPressed: () {
                       showModalBottomSheet(

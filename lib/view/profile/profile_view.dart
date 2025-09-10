@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/round_textfield.dart';
-import '../more/my_order_view.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -36,34 +35,27 @@ class _ProfileViewState extends State<ProfileView> {
           const SizedBox(
             height: 46,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
+          Row(
+            children: [IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Image.asset("assets/img/btn_back.png",
+                          width: 20, height: 20),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+              Expanded(
+                child: Text(
                   "Profile",
                   style: TextStyle(
                       color: TColor.primaryText,
                       fontSize: 20,
                       fontWeight: FontWeight.w800),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyOrderView()));
-                  },
-                  icon: Image.asset(
-                    "assets/img/shopping_cart.png",
-                    width: 25,
-                    height: 25,
-                    color: TColor.primary,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 20,
@@ -100,7 +92,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             label: Text(
               "Edit Profile",
-              style: TextStyle(color: TColor.primary, fontSize: 12),
+              style: TextStyle(color: TColor.secondary, fontSize: 12),
             ),
           ),
           Text(

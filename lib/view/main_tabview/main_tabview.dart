@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/tab_button.dart';
-
+import 'package:food_delivery/view/food_share/food_share_view.dart';
 import '../home/home_view.dart';
 import '../menu/menu_view.dart';
 import '../more/more_view.dart';
 import '../offer/offer_view.dart';
-import '../profile/profile_view.dart';
+
 
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
@@ -91,12 +91,12 @@ class _MainTabViewState extends State<MainTabView> {
                 const  SizedBox(width: 40, height: 40, ),
         
               TabButton(
-                  title: "Profile",
-                  icon: "assets/img/tab_profile.png",
+                  title: "FoodShare",
+                  icon: "assets/img/tab_food_share.png",
                   onTap: () {
                     if (selctTab != 3) {
                       selctTab = 3;
-                      selectPageView = const ProfileView();
+                      selectPageView = const FoodShare();
                     }
                     if (mounted) {
                       setState(() {});
