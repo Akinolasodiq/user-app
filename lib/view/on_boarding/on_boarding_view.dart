@@ -54,10 +54,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         children: [
           Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: TColor.primaryGradient,
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomLeft)),
+              gradient: LinearGradient(
+                  colors: TColor.primaryGradient,
+                  begin: Alignment.centerRight,
+                  end: Alignment.bottomLeft),
+            ),
           ),
           Column(
             children: [
@@ -117,7 +118,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     ),
                   ),
                   Positioned(
-                    top: media.height * 0.55,
+                    top: media.height * 0.50,
                     left: 0,
                     right: 0,
                     child: Row(

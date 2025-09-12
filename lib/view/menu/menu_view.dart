@@ -41,6 +41,7 @@ class _MenuViewState extends State<MenuView> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: TColor.white,
       appBar: AppBar(
         elevation: 0,
         title: Text(
@@ -53,7 +54,7 @@ class _MenuViewState extends State<MenuView> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
               onPressed: () {
                 Navigator.push(

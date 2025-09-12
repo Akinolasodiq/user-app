@@ -1,51 +1,80 @@
 import 'package:flutter/material.dart';
 import '../../common/color_extension.dart';
 
-class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({super.key});
+class PopularReestaurants extends StatelessWidget {
+  const PopularReestaurants({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     // Dummy restaurants
     final restaurants = [
       {
+        "name": "Minute by tuk tuk",
+        "image": "assets/img/res_1.png",
+        "rate": "4.9",
+        "rating": "124",
+        "type": "Asian Fusion",
+        "food_type": "Café"
+      },
+      {
+        "name": "Café de Noir",
+        "image": "assets/img/res_2.png",
+        "rate": "4.9",
+        "rating": "124",
+        "type": "French",
+        "food_type": "Café"
+      },
+      {
+        "name": "Bakes by Tella",
+        "image": "assets/img/res_3.png",
+        "rate": "4.9",
+        "rating": "124",
+        "type": "Bakery",
+        "food_type": "Pastries"
+      },
+      {
         "name": "Domino's Pizza",
         "image": "assets/img/restaurant1.jpg",
-        "rating": "4.7",
-        "type": "Pizza • Fast Food",
+        "rate": "4.9",
+        "rating": "124",
+        "type": "Italian",
+        "food_type": "Pizzeria",
         "location": "2 km away"
       },
-
       {
         "name": "Burger King",
         "image": "assets/img/restaurant2.jpg",
-        "rating": "4.5",
-        "type": "Burgers • American",
+        "rate": "4.5",
+        "rating": "124",
+        "type": "American",
+        "food_type": "Burgers",
         "location": "3.5 km away"
       },
-
       {
         "name": "Subway",
         "image": "assets/img/restaurant3.jpg",
-        "rating": "4.3",
-        "type": "Sandwiches • Healthy",
+        "rate": "4.3",
+        "rating": "124",
+        "type": "Fast Food",
+        "food_type": "Sandwiches",
         "location": "1.2 km away"
       },
-
       {
         "name": "Dunkin' Donuts",
         "image": "assets/img/restaurant4.jpg",
-        "rating": "4.3",
-        "type": "Sandwiches • Healthy",
+        "rate": "4.3",
+        "rating": "124",
+        "type": "Bakery",
+        "food_type": "Donuts",
         "location": "1.2 km away"
       },
-      
       {
         "name": "KFC (Kentucky Fried Chicken)",
         "image": "assets/img/restaurant5.jpg",
-        "rating": "4.3",
-        "type": "Sandwiches • Healthy",
+        "rate": "4.3",
+        "rating": "124",
+        "type": "Fry",
+        "food_type": "Fried Chicken",
         "location": "1.2 km away"
       }
     ];
@@ -56,7 +85,7 @@ class RestaurantListView extends StatelessWidget {
         backgroundColor: TColor.white,
         elevation: 0,
         title: Text(
-          "Choose Restaurant",
+          "Popular Restaurants",
           style: TextStyle(
             color: TColor.primaryText,
             fontSize: 20,
@@ -64,11 +93,9 @@ class RestaurantListView extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          icon:Image.asset("assets/img/btn_back.png",
-                          width: 20, height: 20),
+          icon: Image.asset("assets/img/btn_back.png", width: 20, height: 20),
           onPressed: () => Navigator.pop(context),
         ),
-        centerTitle: true,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
+import 'package:food_delivery/view/more/popular_restaurants.dart';
 
 import '../../common/globs.dart';
 import '../../common/service_call.dart';
@@ -30,28 +31,28 @@ class _HomeViewState extends State<HomeView> {
 
   List popArr = [
     {
-      "image": "assets/img/res_1.png",
       "name": "Minute by tuk tuk",
+      "image": "assets/img/res_1.png",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafe",
-      "food_type": "Western Food"
+      "type": "Asian Fusion",
+      "food_type": "Café"
     },
     {
-      "image": "assets/img/res_2.png",
       "name": "Café de Noir",
+      "image": "assets/img/res_2.png",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafe",
-      "food_type": "Western Food"
+      "type": "French",
+      "food_type": "Café"
     },
     {
-      "image": "assets/img/res_3.png",
       "name": "Bakes by Tella",
+      "image": "assets/img/res_3.png",
       "rate": "4.9",
       "rating": "124",
-      "type": "Cafe",
-      "food_type": "Western Food"
+      "type": "Bakery",
+      "food_type": "Pastries"
     },
   ];
 
@@ -104,6 +105,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.white,
       appBar: AppBar(
         elevation: 0,
         title: Text(
@@ -116,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -212,7 +214,13 @@ class _HomeViewState extends State<HomeView> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ViewAllTitleRow(
                       title: "Popular Restaurants",
-                      onView: () {},
+                      onView: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PopularReestaurants()));
+                      },
                     ),
                   ),
                   ListView.builder(

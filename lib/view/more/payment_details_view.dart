@@ -24,58 +24,51 @@ class _PaymentDetailsViewState extends State<PaymentDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Image.asset("assets/img/btn_back.png", width: 20, height: 20),
+        ),
+        title: Text(
+          "Payment Details",
+          style: TextStyle(
+            color: TColor.primaryText,
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyOrderView()),
+                );
+              },
+              icon: Image.asset(
+                "assets/img/shopping_cart.png",
+                width: 25,
+                height: 25,
+                color: TColor.primary,
+              ),
+            ),
+          ),
+        ],
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 46,
-              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Image.asset("assets/img/btn_back.png",
-                          width: 20, height: 20),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Payment Details",
-                        style: TextStyle(
-                            color: TColor.primaryText,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyOrderView()));
-                      },
-                      icon: Image.asset(
-                        "assets/img/shopping_cart.png",
-                        width: 25,
-                        height: 25,
-                        color: TColor.secondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                padding: const EdgeInsets.fromLTRB(25, 0, 0, 15),
                 child: Text(
                   "Customize your payment method",
                   style: TextStyle(
@@ -98,7 +91,7 @@ class _PaymentDetailsViewState extends State<PaymentDetailsView> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10),
                       color: TColor.textfield,
                       boxShadow: const [
                         BoxShadow(
@@ -223,8 +216,8 @@ class _PaymentDetailsViewState extends State<PaymentDetailsView> {
                     fontSize: 16,
                     onPressed: () {
                       showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
                           context: context,
                           builder: (context) {
                             return const AddCardView();

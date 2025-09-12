@@ -59,6 +59,7 @@ class _MoreViewState extends State<MoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
@@ -71,7 +72,7 @@ class _MoreViewState extends State<MoreView> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -217,7 +218,7 @@ class _MoreViewState extends State<MoreView> {
                               child: Image.asset("assets/img/btn_next.png",
                                   width: 10,
                                   height: 10,
-                                  color: TColor.primaryText),
+                                  color: TColor.secondary),
                             ),
                           ],
                         ),

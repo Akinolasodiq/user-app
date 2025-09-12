@@ -132,14 +132,16 @@ class _AddCardViewState extends State<AddCardView> {
                   fontWeight: FontWeight.w500),
             ),
             const Spacer(),
-            Switch(
-                value: isAnyTime,
-                activeColor: TColor.primary,
-                onChanged: (newVal) {
-                  setState(() {
-                    isAnyTime = newVal;
-                  });
-                })
+            Expanded(
+              child: Switch(
+                  value: isAnyTime,
+                  activeColor: TColor.primary,
+                  onChanged: (newVal) {
+                    setState(() {
+                      isAnyTime = newVal;
+                    });
+                  }),
+            )
           ]),
           const SizedBox(
             height: 25,

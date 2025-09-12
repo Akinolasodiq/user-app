@@ -1,40 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/common/color_extension.dart';
+import 'package:food_delivery/view/food_share/aactive_orders.dart';
 import 'package:food_delivery/view/more/my_order_view.dart';
-import '../../common/color_extension.dart';
 
-class FoodShare extends StatefulWidget {
-  const FoodShare({super.key});
-
-  @override
-  State<FoodShare> createState() => _FoodShareState();
-}
-
-class _FoodShareState extends State<FoodShare> {
-  List<Map<String, String>> foodShareArr = [
-    {
-      "index": "1",
-      "title": "Dominio's Pizza",
-      "price": "Save ₹50",
-      "count": "2 people joined",
-      "time": "10 mins left",
-    },
-    {
-      "index": "2",
-      "title": "Burger King",
-      "price": "Save ₹30",
-      "count": "3 people joined",
-      "time": "7 mins left",
-    }
-  ];
+class FoodShareView extends StatelessWidget {
+  const FoodShareView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
+    final foodShareOptionsList = [
+      {
+        "title": "Create Group Order",
+        "subtitle": "Start a new group order & invite friends.",
+        "icon": Icons.group_add,
+        "onTap": () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Create Group Order tapped")),
+          );
+        },
+      },
+      {
+        "title": "Join Order",
+        "subtitle": "Browse available group orders to join.",
+        "icon": Icons.list_alt,
+        "onTap": () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ActiveOrdersView(),
+            ),
+          );
+        },
+      },
+      {
+        "title": "Random Join",
+        "subtitle": "Get matched with random users nearby.",
+        "icon": Icons.shuffle,
+        "onTap": () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Random Join tapped")),
+          );
+        },
+      },
+    ];
+
     return Scaffold(
+      backgroundColor: TColor.white,
       appBar: AppBar(
-        elevation: 0,
         title: Text(
-          "FoodShare",
+          "Food Share",
           style: TextStyle(
             color: TColor.primaryText,
             fontSize: 20,
@@ -43,7 +57,7 @@ class _FoodShareState extends State<FoodShare> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: IconButton(
               onPressed: () {
                 Navigator.push(
@@ -60,194 +74,115 @@ class _FoodShareState extends State<FoodShare> {
             ),
           ),
         ],
+        elevation: 0,
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          child: Column(
-            children: [
-              Column(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Title & subtitle
+            Text(
+              "Share food, save more",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: TColor.primaryText,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Choose how you want to enjoy FoodShare",
+              style: TextStyle(
+                fontSize: 14,
+                color: TColor.secondaryText,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 40),
+
+            Expanded(
+              child: ListView.separated(
+                itemCount: foodShareOptionsList.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 25),
+                itemBuilder: (context, index) {
+                  final option = foodShareOptionsList[index];
+                  return _buildOptionCard(
+                    context,
+                    title: option["title"] as String,
+                    subtitle: option["subtitle"] as String,
+                    icon: option["icon"] as IconData,
+                    onTap: option["onTap"] as VoidCallback,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOptionCard(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: TColor.primaryGradient),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: TColor.primary.withOpacity(0.25),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.white, size: 28),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: Container(
-                      height: media.width * 0.40,
-                      decoration: BoxDecoration(
-                        color: TColor.textfield,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: TColor.placeholder,
-                                radius: 30,
-                                child: Image.asset(
-                                  "assets/img/foodshare_cutlery.png",
-                                  height: 25,
-                                  width: 25,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "Start a Group Order",
-                                        style: TextStyle(
-                                            color: TColor.primaryText,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w800),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: TColor.primaryGradient,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: SizedBox(
-                                height: 50,
-                                child: ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadiusGeometry.circular(
-                                                    15))),
-                                    onPressed: () {},
-                                    icon: Image.asset(
-                                      "assets/img/foodshare_store.png",
-                                      color: Colors.white,
-                                      height: 15,
-                                      width: 15,
-                                    ),
-                                    label: Text(
-                                      "Choose Restaurant",
-                                      style: TextStyle(color: TColor.white),
-                                    )),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: foodShareArr.length,
-                    itemBuilder: (context, index) {
-                      final foodshareObj = foodShareArr[index];
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        margin: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: TColor.placeholder,
-                            )),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  foodshareObj["title"].toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w800,
-                                      color: TColor.primaryText),
-                                ),
-                                Text(
-                                  foodshareObj["price"].toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w800,
-                                      color: TColor.primary),
-                                ),
-                                Text(
-                                  "${foodshareObj["count"]} • ${foodshareObj["time"]}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13,
-                                      color: TColor.secondaryText),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 50,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    gradient: LinearGradient(
-                                      colors: TColor.primaryGradient,
-                                    )),
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadiusGeometry.circular(
-                                                  20))),
-                                  child: Text(
-                                    "Join Order",
-                                    style: TextStyle(color: TColor.white),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 13,
+                    ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Your Order Tracking",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                            color: TColor.primaryText),
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Preparing"),
-                          Text("Out for delivery"),
-                          Text("Delivered"),
-                        ],
-                      ),
-                    ],
-                  )
                 ],
               ),
-            ],
-          ),
+            ),
+            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
+          ],
         ),
       ),
     );

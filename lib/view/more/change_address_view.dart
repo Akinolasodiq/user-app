@@ -58,6 +58,7 @@ class _ChangeAddressViewState extends State<ChangeAddressView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: TColor.white,
       appBar: AppBar(
         backgroundColor: TColor.white,
         leading: IconButton(

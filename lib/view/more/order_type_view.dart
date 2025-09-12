@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/view/more/choose_restaurant_view.dart';
+import 'package:food_delivery/view/checkout/checkout_message_view.dart';
 import 'package:food_delivery/view/more/food_share_option_view.dart';
 import '../../common/color_extension.dart';
 
@@ -33,7 +33,6 @@ class _OrderTypeViewState extends State<OrderTypeView> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Close button
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -49,8 +48,6 @@ class _OrderTypeViewState extends State<OrderTypeView> {
             ],
           ),
           const SizedBox(height: 15),
-
-          // Title
           Text(
             "Select Order Type",
             style: TextStyle(
@@ -70,8 +67,6 @@ class _OrderTypeViewState extends State<OrderTypeView> {
             ),
           ),
           const SizedBox(height: 30),
-
-          // Solo Order Button
           Container(
             height: 55,
             width: double.infinity,
@@ -88,13 +83,14 @@ class _OrderTypeViewState extends State<OrderTypeView> {
             ),
             child: TextButton.icon(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const Dialog(
-                    insetPadding: EdgeInsets.all(20),
-                    child: ChooseRestaurant(),
-                  ),
-                );
+                showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    isDismissible: false,
+                    builder: (context) {
+                      return const CheckoutMessageView();
+                    });
               },
               icon: const Icon(Icons.person, color: Colors.white, size: 22),
               label: const Text(
@@ -104,7 +100,6 @@ class _OrderTypeViewState extends State<OrderTypeView> {
             ),
           ),
           const SizedBox(height: 15),
-
           Container(
             height: 55,
             width: double.infinity,
