@@ -80,5 +80,25 @@ class _MyAppState extends State<MyApp> {
         //   return FlutterEasyLoading(child: child);
         // },
         );
+  // This widget is the root of your application.
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: (routeSettings) {
+        switch (routeSettings.name) {
+          case "welcome":
+            return MaterialPageRoute(builder: (context) => const WelcomeView());
+          case "Home":
+            return MaterialPageRoute(builder: (context) => const MainTabView());
+          default:
+            return MaterialPageRoute(
+                builder: (context) => Scaffold(
+                      body: Center(
+                          child: Text("No path for ${routeSettings.name}")),
+                    ));
+        }
+      },
+      builder: (context, child) {
+        return FlutterEasyLoading(child: child);
+      },
+    );
   }
 }
