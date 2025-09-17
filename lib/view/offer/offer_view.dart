@@ -152,7 +152,7 @@ class _OfferViewState extends State<OfferView>
                       children: [
                         _buildStatBox(
                           icon: Icons.room_service,
-                          title: "Total Spending",
+                          title: "Total Spend",
                           value: "₹$total",
                         ),
                         _buildStatBox(

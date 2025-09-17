@@ -1,3 +1,4 @@
+import 'package:animated_toggle/animated_toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/common_widget/round_textfield.dart';
@@ -21,6 +22,18 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TextEditingController txtSearch = TextEditingController();
+
+  int selectedTabIndex = 0;
+
+  List<String> tabOption = ["Food", "Grocery"];
+  List<Widget> get tabOptionView => [
+        HomeFoodTabOptionView(
+            catArr: catArr,
+            popArr: popArr,
+            mostPopArr: mostPopArr,
+            recentArr: recentArr),
+        const HomeGroceryTabOptionView()
+      ];
 
   List catArr = [
     {"image": "assets/img/cat_offer.png", "name": "Offers"},
@@ -107,189 +120,293 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: TColor.white,
       appBar: AppBar(
+        backgroundColor: TColor.white,
+        scrolledUnderElevation: 0,
         elevation: 0,
-        title: Text(
-          "Good morning ${ServiceCall.userPayload[KKey.name] ?? ""}!",
-          style: TextStyle(
-            color: TColor.primaryText,
-            fontSize: 20,
-            fontWeight: FontWeight.w800,
+        automaticallyImplyLeading: false,
+        title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            "Delivering to",
+            style: TextStyle(
+              color: TColor.secondaryText,
+              fontSize: 11,
+            ),
           ),
-        ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Text(
+                "Current Location",
+                style: TextStyle(
+                  color: TColor.secondaryText,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 25),
+              Image.asset(
+                "assets/img/dropdown.png",
+                width: 12,
+                height: 12,
+                color: TColor.secondary,
+              ),
+            ],
+          ),
+        ]),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyOrderView()),
-                );
-              },
-              icon: Image.asset(
-                "assets/img/shopping_cart.png",
-                width: 25,
-                height: 25,
-                color: TColor.primary,
+            child: Text(
+              "HI ${ServiceCall.userPayload[KKey.name] ?? ""}!",
+              style: TextStyle(
+                color: TColor.primaryText,
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
               ),
             ),
           ),
         ],
-        automaticallyImplyLeading: false,
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Delivering to",
-                  style: TextStyle(
-                    color: TColor.secondaryText,
-                    fontSize: 11,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    Text(
-                      "Current Location",
-                      style: TextStyle(
-                        color: TColor.secondaryText,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+          Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: AnimatedHorizontalToggle(
+                  taps: tabOption,
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 50,
+                  duration: const Duration(milliseconds: 100),
+                  initialIndex: 0,
+                  activeColor: TColor.white,
+                  activeTextStyle: TextStyle(
+                      color: TColor.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                      inActiveTextStyle: TextStyle(
+                        color: TColor.primaryText,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
                       ),
-                    ),
-                    const SizedBox(width: 25),
-                    Image.asset(
-                      "assets/img/dropdown.png",
-                      width: 12,
-                      height: 12,
-                      color: TColor.secondary,
+                  // activeBoxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black12.withOpacity(1),
+                  //     blurRadius: 2,
+                  //     offset: const Offset(-2, 2),
+                  //   ),
+                  // ],
+                  horizontalPadding: 10,
+                  activeVerticalPadding: 2.8,
+                  activeButtonRadius: 50,
+                  radius: 50,
+                  background: TColor.textfield,
+                  onChange: (currentIndex, targetIndex) {
+                    setState(() {
+                      selectedTabIndex = currentIndex;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RoundTextfield(
+                      hintText: selectedTabIndex == 0
+                          ? "Search Food"
+                          : "Search Grocery",
+                      controller: txtSearch,
+                      left: Container(
+                        alignment: Alignment.center,
+                        width: 30,
+                        child: Image.asset(
+                          "assets/img/search.png",
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                RoundTextfield(
-                  hintText: "Search Food",
-                  controller: txtSearch,
-                  left: Container(
-                    alignment: Alignment.center,
-                    width: 30,
-                    child: Image.asset(
-                      "assets/img/search.png",
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
 
-          // ✅ Scrollable Section
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      itemCount: catArr.length,
-                      itemBuilder: ((context, index) {
-                        var cObj = catArr[index] as Map? ?? {};
-                        return CategoryCell(
-                          cObj: cObj,
-                          onTap: () {},
-                        );
-                      }),
+              // ✅ Scrollable Section
+              Expanded(
+                child: SingleChildScrollView(
+                    child: tabOptionView[selectedTabIndex]),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: TColor.white,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MyOrderView()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/img/shopping_cart.png",
+                      width: 25,
+                      height: 25,
+                      color: TColor.primary,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ViewAllTitleRow(
-                      title: "Popular Restaurants",
-                      onView: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const PopularReestaurants()));
-                      },
+                    const SizedBox(
+                      width: 12,
                     ),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    itemCount: popArr.length,
-                    itemBuilder: ((context, index) {
-                      var pObj = popArr[index] as Map? ?? {};
-                      return PopularRestaurantRow(
-                        pObj: pObj,
-                        onTap: () {},
-                      );
-                    }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ViewAllTitleRow(
-                      title: "Most Popular",
-                      onView: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MyOrderView(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      itemCount: mostPopArr.length,
-                      itemBuilder: ((context, index) {
-                        var mObj = mostPopArr[index] as Map? ?? {};
-                        return MostPopularCell(
-                          mObj: mObj,
-                          onTap: () {},
-                        );
-                      }),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ViewAllTitleRow(
-                      title: "Recent Items",
-                      onView: () {},
-                    ),
-                  ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    itemCount: recentArr.length,
-                    itemBuilder: ((context, index) {
-                      var rObj = recentArr[index] as Map? ?? {};
-                      return RecentItemRow(
-                        rObj: rObj,
-                        onTap: () {},
-                      );
-                    }),
-                  )
-                ],
+                    const Text(
+                      "View Cart",
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class HomeFoodTabOptionView extends StatelessWidget {
+  const HomeFoodTabOptionView({
+    super.key,
+    required this.catArr,
+    required this.popArr,
+    required this.mostPopArr,
+    required this.recentArr,
+  });
+
+  final List catArr;
+  final List popArr;
+  final List mostPopArr;
+  final List recentArr;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            itemCount: catArr.length,
+            itemBuilder: ((context, index) {
+              var cObj = catArr[index] as Map? ?? {};
+              return CategoryCell(
+                cObj: cObj,
+                onTap: () {},
+              );
+            }),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ViewAllTitleRow(
+            title: "Popular Restaurants",
+            onView: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PopularReestaurants()));
+            },
+          ),
+        ),
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          itemCount: popArr.length,
+          itemBuilder: ((context, index) {
+            var pObj = popArr[index] as Map? ?? {};
+            return PopularRestaurantRow(
+              pObj: pObj,
+              onTap: () {},
+            );
+          }),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ViewAllTitleRow(
+            title: "Most Popular",
+            onView: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyOrderView(),
+                ),
+              );
+            },
+          ),
+        ),
+        SizedBox(
+          height: 200,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            itemCount: mostPopArr.length,
+            itemBuilder: ((context, index) {
+              var mObj = mostPopArr[index] as Map? ?? {};
+              return MostPopularCell(
+                mObj: mObj,
+                onTap: () {},
+              );
+            }),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ViewAllTitleRow(
+            title: "Recent Items",
+            onView: () {},
+          ),
+        ),
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          itemCount: recentArr.length,
+          itemBuilder: ((context, index) {
+            var rObj = recentArr[index] as Map? ?? {};
+            return RecentItemRow(
+              rObj: rObj,
+              onTap: () {},
+            );
+          }),
+        )
+      ],
+    );
+  }
+}
+
+class HomeGroceryTabOptionView extends StatelessWidget {
+  const HomeGroceryTabOptionView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: const Center(
+        child: Text(
+          "Grocery",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+        ),
       ),
     );
   }
