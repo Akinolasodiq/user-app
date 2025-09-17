@@ -178,18 +178,17 @@ class _HomeViewState extends State<HomeView> {
                   taps: tabOption,
                   width: MediaQuery.of(context).size.width - 40,
                   height: 50,
-                  duration: const Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 0),
                   initialIndex: 0,
                   activeColor: TColor.white,
                   activeTextStyle: TextStyle(
                       color: TColor.primary,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
-                      inActiveTextStyle: TextStyle(
-                        color: TColor.primaryText,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                      ),
+                  inActiveTextStyle: TextStyle(
+                      color: TColor.primaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
                   // activeBoxShadow: [
                   //   BoxShadow(
                   //     color: Colors.black12.withOpacity(1),
