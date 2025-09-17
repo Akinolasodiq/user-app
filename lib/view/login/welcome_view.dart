@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/view/login/login_view.dart';
 import 'package:food_delivery/view/login/sing_up_view.dart';
+import 'package:food_delivery/view/on_boarding/on_boarding_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/round_button.dart';
@@ -57,6 +58,23 @@ class _WelcomeViewState extends State<WelcomeView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: RoundButton(
+                title: "Explore Now",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OnBoardingView(),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: RoundButton(
                 title: "Login",
                 onPressed: () {
                   Navigator.push(
@@ -67,9 +85,6 @@ class _WelcomeViewState extends State<WelcomeView> {
                   );
                 },
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),

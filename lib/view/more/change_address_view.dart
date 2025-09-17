@@ -89,10 +89,10 @@ class _ChangeAddressViewState extends State<ChangeAddressView> {
             mapType: MapType.normal,
             initialCameraPosition: _kLake,
             compassEnabled: false,
-            gestureRecognizers: Set()
-              ..add(Factory<PanGestureRecognizer>(
-                () => PanGestureRecognizer(),
-              )),
+            gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+              Factory<OneSequenceGestureRecognizer>(
+                  () => PanGestureRecognizer()),
+            },
             markers: markers,
             onMapCreated: (GoogleMapController controller) {
               _controller = controller;
@@ -103,24 +103,22 @@ class _ChangeAddressViewState extends State<ChangeAddressView> {
       bottomNavigationBar: BottomAppBar(
           child: SafeArea(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric( vertical: 15 , horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
             child: RoundTextfield(
               hintText: "Search Address",
               left: Icon(Icons.search, color: TColor.primaryText),
             ),
           ),
-
           Padding(
-            padding: const EdgeInsets.symmetric( horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Row(children: [
-
-              Image.asset('assets/img/fav_icon.png', width: 35, height: 35 ), 
-
-              const SizedBox(width: 8,),
-
+              Image.asset('assets/img/fav_icon.png', width: 35, height: 35),
+              const SizedBox(
+                width: 8,
+              ),
               Expanded(
                 child: Text(
                   "Choose a saved place",
@@ -130,13 +128,14 @@ class _ChangeAddressViewState extends State<ChangeAddressView> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-
-              Image.asset('assets/img/btn_next.png', width: 15, height: 15, color: TColor.primaryText, )
-
+              Image.asset(
+                'assets/img/btn_next.png',
+                width: 15,
+                height: 15,
+                color: TColor.primaryText,
+              )
             ]),
           ),
-
-
         ],
       ))),
     );
