@@ -20,11 +20,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
 
-  if(Globs.udValueBool(Globs.userLogin)) {
+  if (Globs.udValueBool(Globs.userLogin)) {
     ServiceCall.userPayload = Globs.udValue(Globs.userPayload);
   }
 
-  runApp( const MyApp(defaultHome:  StartupView(),));
+  runApp(
+    const MyApp(
+      defaultHome: StartupView(),
+    ),
+  );
 }
 
 void configLoading() {
@@ -50,8 +54,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,38 +61,26 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Metropolis",
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
       ),
-      home: widget.defaultHome,
+      home: const MainTabView(),
       navigatorKey: locator<NavigationService>().navigatorKey,
-      onGenerateRoute: (routeSettings){
+      onGenerateRoute: (routeSettings) {
         switch (routeSettings.name) {
           case "welcome":
-              return MaterialPageRoute(builder: (context) => const WelcomeView() );
+            return MaterialPageRoute(
+              builder: (context) => const WelcomeView(),
+            );
           case "Home":
-              return MaterialPageRoute(builder: (context) => const MainTabView() );
+            return MaterialPageRoute(
+              builder: (context) => const MainTabView(),
+            );
           default:
-              return MaterialPageRoute(builder: (context) => Scaffold(
-                body: Center(
-                  child: Text("No path for ${routeSettings.name}")
-                ),
-              ) );
+            return MaterialPageRoute(
+              builder: (context) => Scaffold(
+                body: Center(child: Text("No path for ${routeSettings.name}")),
+              ),
+            );
         }
       },
       builder: (context, child) {
