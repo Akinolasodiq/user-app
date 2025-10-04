@@ -41,9 +41,7 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    // decide gradient + hint based on tab
     final isFoodTab = _tabController.index == 0;
-
     return Scaffold(
       backgroundColor: TColor.white,
       appBar: AppBar(

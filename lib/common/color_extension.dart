@@ -8,6 +8,7 @@ class TColor {
   static Color textfield = const Color(0xffF2F2F2);
   static Color placeholder = const Color(0xffB6B7B7);
   static Color white = const Color(0xffffffff);
+  static Color foodShare = const Color(0xFF00BFA5);
 
   static List<Color>  primaryGradient = [
         const Color(0xFF07BAD8),

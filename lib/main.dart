@@ -63,7 +63,8 @@ class _MyAppState extends State<MyApp> {
         fontFamily: "Metropolis",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MainTabView(),
+      home: widget.defaultHome,
+      // home: const Sandbox(),
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: (routeSettings) {
         switch (routeSettings.name) {
