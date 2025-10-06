@@ -7,7 +7,7 @@ class FoodShareTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-       final foodShareContainerList = [
+    List foodShareContainerList = [
       {
         "icon": Icons.groups_2_outlined,
         "iconColor": const Color(0xFF16A34A),
@@ -23,6 +23,21 @@ class FoodShareTabView extends StatelessWidget {
         "subtitle":
             "Find nearby people who created a random group to order together."
       }
+    ];
+
+    List whyFoodShareList = [
+      {
+        "icon": Icons.local_shipping_outlined,
+        "text": "Save on delivery charges"
+      },
+      {
+        "icon": Icons.local_offer_outlined,
+        "text": "Bigger orders mean more discount"
+      },
+      {
+        "icon": Icons.payments_outlined,
+        "text": "Order together, pay separately"
+      },
     ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,11 +82,18 @@ class FoodShareTabView extends StatelessWidget {
                       color: TColor.primaryText),
                 ),
                 const SizedBox(height: 12),
-                buildInfoRow(Icons.fire_truck_outlined, "Save on delivery charges"),
-                buildInfoRow(Icons.local_offer_outlined,
-                    "Bigger orders mean more discounts"),
-                buildInfoRow(
-                    Icons.payments_outlined, "Order together, pay separately"),
+                ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  itemCount: whyFoodShareList.length,
+                  itemBuilder: (context, index) {
+                    final wFSObj = whyFoodShareList[index];
+                    return buildInfoRow(
+                      icon: wFSObj["icon"],
+                      text: wFSObj["text"],
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -150,23 +172,20 @@ Widget buildCard({
   );
 }
 
-Widget buildInfoRow(IconData icon, String text) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 8),
-    child: Row(
-      children: [
-        Icon(
-          icon,
-          size: 24,
-          color: const Color(0xFF00BFA5),
-        ),
-        const SizedBox(width: 12),
-        Text(
-          text,
-          style:
-              GoogleFonts.poppins(fontSize: 14, color: const Color(0xFF757575)),
-        ),
-      ],
-    ),
+Widget buildInfoRow({required IconData icon, required String text}) {
+  return Row(
+    children: [
+      Icon(
+        icon,
+        size: 24,
+        color: const Color(0xFF00BFA5),
+      ),
+      const SizedBox(width: 12),
+      Text(
+        text,
+        style:
+            GoogleFonts.poppins(fontSize: 14, color: const Color(0xFF757575)),
+      ),
+    ],
   );
 }

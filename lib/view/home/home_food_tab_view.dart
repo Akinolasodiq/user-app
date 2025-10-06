@@ -263,26 +263,24 @@ class HomeFoodTabView extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(
-          height: 240,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              mainAxisExtent: 110,
-            ),
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemCount: foodMostPopArr.length,
-            itemBuilder: ((context, index) {
-              var mObj = foodMostPopArr[index] as Map? ?? {};
-              return FoodTabCatCell(
-                mObj: mObj,
-                onTap: () {},
-              );
-            }),
+        GridView.builder(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            mainAxisExtent: 110,
           ),
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: foodMostPopArr.length,
+          itemBuilder: ((context, index) {
+            var mObj = foodMostPopArr[index] as Map? ?? {};
+            return FoodTabCatCell(
+              mObj: mObj,
+              onTap: () {},
+            );
+          }),
         ),
         const SizedBox(
           height: 12,

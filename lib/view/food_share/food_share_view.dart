@@ -2,6 +2,7 @@ import 'package:animated_segmented_tab_control/animated_segmented_tab_control.da
 import 'package:flutter/material.dart';
 import 'package:food_delivery/common/color_extension.dart';
 import 'package:food_delivery/view/food_share/food_share_tab_view.dart';
+import 'package:food_delivery/view/food_share/share_basket_tab_view.dart';
 
 class FoodShareView extends StatefulWidget {
   const FoodShareView({super.key});
@@ -10,15 +11,11 @@ class FoodShareView extends StatefulWidget {
   State<FoodShareView> createState() => _FoodShareView();
 }
 
-class _FoodShareView extends State<FoodShareView> with SingleTickerProviderStateMixin {
+class _FoodShareView extends State<FoodShareView>
+    with SingleTickerProviderStateMixin {
   List<Widget> get tabOptionView => [
         const FoodShareTabView(),
-        const Center(
-          child: Text(
-            "ShareBasket",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        )
+        const ShareBasketTabView(),
       ];
 
   @override
@@ -31,8 +28,7 @@ class _FoodShareView extends State<FoodShareView> with SingleTickerProviderState
           child: Column(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: SegmentedTabControl(
                   barDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
