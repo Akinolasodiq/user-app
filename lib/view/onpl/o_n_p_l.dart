@@ -10,7 +10,11 @@ class ONPLView extends StatelessWidget {
     double total = 3000;
     double spent = 1250;
     double payLaterLimit = 200;
+<<<<<<< HEAD
     double balance = total - spent;
+=======
+    double remaining = total - spent;
+>>>>>>> 1b62526 (Reconnected project and updated code after system reset)
 
     // ✅ Progress width ratio
     double progress = (spent / total).clamp(0.0, 1.0);
@@ -154,7 +158,11 @@ class ONPLView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
+<<<<<<< HEAD
                         "₹$spent",
+=======
+                        "Spent: ₹$spent",
+>>>>>>> 1b62526 (Reconnected project and updated code after system reset)
                         style: GoogleFonts.manrope(
                           color: TColor.primaryText,
                           fontSize: 15,
@@ -162,7 +170,11 @@ class ONPLView extends StatelessWidget {
                         ),
                       ),
                       Text(
+<<<<<<< HEAD
                         "₹$balance",
+=======
+                        "Remaining: ₹$remaining",
+>>>>>>> 1b62526 (Reconnected project and updated code after system reset)
                         style: GoogleFonts.manrope(
                           color: TColor.primaryText,
                           fontSize: 15,
